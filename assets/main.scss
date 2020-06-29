@@ -5,6 +5,27 @@
     src: local('Circe'), url('~static/fonts/CRC55.woff') format('woff');
 }
 
+body{
+    &::-webkit-scrollbar{
+        width: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f7f7f7;
+    }
+
+    &::-webkit-scrollbar-thumb{
+        background: #ddd;
+        border-radius:5px;
+    }
+}
+
 .solo .v-input__slot{
     box-shadow:none !important;
 }
+
+// @media(min-width: 1640px){
+//     html{
+//         font-size: 112.5%;
+//     }
+// }

@@ -1,8 +1,10 @@
 <template>
-  <v-app>
+  <v-app class="#app">
+    <!-- Menus -->
     <Menu />
     <SideNav style="margin-left: 56px;" />
-    <v-main style="margin-left:56px">
+    <!-- Content -->
+    <v-main style="margin-left:56px;">
       <nuxt />
     </v-main>
   </v-app>
@@ -13,8 +15,8 @@ import { Vue, Component } from 'nuxt-property-decorator'
 
 @Component({
   components: {
-    Menu: () => import('@/components/partials/Menu.vue'),
-    SideNav: () => import('@/components/partials/SideNav.vue')
+    Menu: () => import('@/components/dashboard/Menu.vue'),
+    SideNav: () => import('@/components/dashboard/SideNav.vue')
   }
 })
 export default class Default extends Vue {
