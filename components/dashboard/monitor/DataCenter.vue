@@ -7,31 +7,31 @@
     <v-row>
       <v-col cols="6">
         <DataCard
-          :headers="headers"
-          :items="items"
+          :headers="headersAvg"
           title="Devices by CPU Utilization"
+          metric="cpu"
         />
       </v-col>
       <v-col cols="6">
         <DataCard
           :headers="headers"
-          :items="items"
           title="Devices by Disk Utilization"
+          metric="disk"
         />
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="6">
         <DataCard
-          :headers="headers"
-          :items="items"
+          :headers="headersAvg"
           title="Devices by Memory Utilization"
+          metric="memory"
         />
       </v-col>
       <v-col cols="6">
         <DataCard
           :headers="headers2"
-          :items="items2"
+          metric="interface-usage"
           title="Top Interfaces by Bandwidth Utilization"
         />
       </v-col>
@@ -45,14 +45,9 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { Vue, Component } from 'nuxt-property-decorator';
 
-@Component({
-  components: {
-    DataCard: () => import('@/components/partials/DataCard.vue'),
-    NetworkCard: () => import('@/components/partials/NetworkCard.vue')
-  }
-})
+@Component
 export default class DataCenter extends Vue {
   // Dummy data
   headers = [
@@ -69,7 +64,30 @@ export default class DataCenter extends Vue {
     {
       text: 'Utilization %',
       value: 'utilization',
+      class: 'data-table-header table-progress'
+    }
+  ]
+
+  headersAvg = [
+    {
+      text: 'Device name',
+      value: 'name',
       class: 'data-table-header'
+    },
+    {
+      text: 'min %',
+      value: 'min',
+      class: 'data-table-header'
+    },
+    {
+      text: 'max %',
+      value: 'max',
+      class: 'data-table-header'
+    },
+    {
+      text: 'Average %',
+      value: 'utilization',
+      class: 'data-table-header table-progress'
     }
   ]
 
@@ -80,35 +98,14 @@ export default class DataCenter extends Vue {
       class: 'data-table-header'
     },
     {
-      text: 'Recieve',
-      value: 'recieve',
+      text: 'Receive / sec',
+      value: 'receive',
       class: 'data-table-header'
     },
     {
-      text: 'Transmit',
+      text: 'Transmit / sec',
       value: 'transmit',
       class: 'data-table-header'
-    }
-  ]
-
-  items = [
-    {
-      name: 'OPM-Server25<span class="name">IP: 10.35.32.45</span>',
-      volume: 99,
-      utilization: 99,
-      class: 'data-table-item'
-    },
-    {
-      name: 'OPM-Server25<span class="name">IP: 10.35.32.45</span>',
-      volume: 99,
-      utilization: 20,
-      class: 'data-table-item'
-    },
-    {
-      name: 'OPM-Server25<span class="name">IP: 10.35.32.45</span>',
-      volume: 99,
-      utilization: 40,
-      class: 'data-table-item'
     }
   ]
 
@@ -120,7 +117,7 @@ export default class DataCenter extends Vue {
     },
     {
       name: 'HP NC553i Dual Port FlexFabric 10Gb Converged Network<span class="name">OPM-Server15 &nbsp; IP: 10.35.32.45</span>',
-      recieve: '0.47 %',
+      receive: '0.47 %',
       transmit: '0.04 %'
     },
     {

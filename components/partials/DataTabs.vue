@@ -11,7 +11,7 @@
       v-for="(tab, i) in tabs"
       :key="i"
       :href="`#tab-${i}`"
-      class="ml-0 py-3 d-flex justify-start text-capitalize font-weight-bold"
+      class="data-tab ml-0 py-3 d-flex justify-start text-capitalize font-weight-bold"
       style="max-width: 379px; font-family: 'Circe'; font-size: 1.25rem"
     >
       {{ tab }}
@@ -50,5 +50,11 @@ export default class DataTabs extends Vue {
 <style lang="scss">
 #tabs .v-tabs-bar{
   border-bottom: 1px solid #e0e9f5 !important;
+}
+
+@media(max-width: 1600px){
+  #tabs .data-tab{
+    max-width: 300px !important;
+  }
 }
 </style>

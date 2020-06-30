@@ -18,12 +18,14 @@
           width="56"
           height="56"
           contain=""
-          :src="require('@/assets/img/organization-logo.png')"
+          :src="organisation.Logo"
         />
         <v-sheet color="transparent">
           <v-select
-            v-model="organization"
-            :items="items"
+            v-model="selectedOrganisation"
+            :items="organisationList"
+            :disabled="isLoading"
+            :placeholder="isLoading ? 'Loading...' : ''"
             style="font-family: 'Circe'; font-size: 18px; color:#505965 !important;"
             solo=""
             class="solo organization mt-n2 font-weight-bold"
@@ -36,6 +38,7 @@
               nudgeRight:10,
             }"
             append-icon="mdi-chevron-down"
+            @change="getOrganisationSites"
           />
           <v-sheet
             color="transparent"
@@ -57,19 +60,22 @@
       </v-list-item>
       <v-list-item class="px-1 mb-1">
         <v-select
-          v-model="site"
-          :items="siteItems"
+          v-model="selectedSite"
+          :items="siteList"
+          :disabled="isLoading"
           style="color:#13C2C2 !important; font-weight:500"
           solo=""
           class="solo"
           hide-details=""
           dense=""
+          :placeholder="isLoading ? 'Loading...' : ''"
           background-color="#fff"
           color="#2D415C"
           :menu-props="{
             nudgeBottom: 35,
           }"
           append-icon="mdi-chevron-down"
+          @change="setSiteDataCenters"
         />
       </v-list-item>
       <v-list-item class="px-1">
@@ -79,8 +85,10 @@
             style="font-family:'Circe'; color:#79C3A7"
           >Data List</label>
           <v-select
-            v-model="dataCenter"
-            :items="dataCenters"
+            v-model="selectedDataCenter"
+            :items="dataCenterList"
+            item-text="Name"
+            item-value="Name"
             style="color:#13C2C2 !important; font-weight:500"
             solo=""
             class="solo"
@@ -92,6 +100,7 @@
               nudgeBottom: 35,
             }"
             append-icon="mdi-chevron-down"
+            @change="storeSelectedDataCenter"
           />
         </v-sheet>
       </v-list-item>
@@ -252,22 +261,25 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator';
+import { store } from '../../store';
+import { Organisation, DataCenter } from '../../store/types/organisation';
 
-@Component({
-  components: {
-    IconBase: () => import('@/components/partials/IconBase.vue')
-  }
-})
+@Component
 export default class SideNav extends Vue {
-  // Will change it later
-  items = ['Organization'];
-  siteItems = ['Site name'];
-  dataCenters = ['Data Center Name 1']
+  // For organisations fetching
+  isLoading = false;
 
-  organization = 'Organization';
-  site = 'Site name';
-  dataCenter = 'Data Center Name 1'
+  // Selected Organisation data
+  organisation = {} as Organisation
+
+  organisationList: Array<string> = []
+  siteList: Array<string> = [];
+  dataCenterList:Array<DataCenter> = [];
+
+  selectedOrganisation = '';
+  selectedSite = '';
+  selectedDataCenter = '';
 
   // Dashboard pages
   monitoring = [
@@ -290,6 +302,75 @@ export default class SideNav extends Vue {
     { name: 'Reports', to: '/reports', icon: 'report' },
     { name: 'Administration', to: '/administration', icon: 'administration' }
   ]
+
+  get organisations () {
+    return store.getters.organisations;
+  }
+
+  async mounted () {
+    this.isLoading = true;
+    // Fetching all organisations
+    await store.dispatch.fetchOrganisations();
+    // Adding all the fetched organisations id to the organisationList dropdown prop
+    this.organisationList = this.organisations!.map(org => org.OrganisationId);
+    // Setting the default organisation select value
+    this.selectedOrganisation = this.organisationList[0];
+    // Fetching selected organisation details
+    await this.getOrganisationSites(this.selectedOrganisation);
+
+    this.isLoading = false;
+  }
+
+  // @change organisation v-select
+  async getOrganisationSites (oid: string) {
+    this.isLoading = true;
+    // Fetch selected organisation
+    this.organisation = await store.dispatch.fetchOrganisation({ oid });
+    // Adding all the organisation sites data to siteList dropdown prop
+    this.siteList = this.organisation.Sites.map(s => s.Name);
+    // set selectedSite to the first default value
+    this.selectedSite = this.siteList[0];
+    // adding all the selected site's datacenters to dataCenterList
+    this.setSiteDataCenters(this.selectedSite);
+
+    // Store the selectedOrganisation value in vuex store
+    store.commit.SET_SYSTEM_SELECTION({
+      key: 'organisationName',
+      value: oid
+    });
+
+    this.isLoading = false;
+  }
+
+  // @change site v-select
+  setSiteDataCenters (siteName: string) {
+    // Adding all the selected site's data center to dataCenterList dropdown prop
+    this.organisation.Sites.forEach((s) => {
+      if (s.Name === siteName) {
+        this.dataCenterList = s.DataCenters;
+      }
+    });
+
+    // Selecting the first datacenter of the current site
+    this.selectedDataCenter = this.dataCenterList[0].Name;
+
+    // Store the selectedSite value in vuex store
+    store.commit.SET_SYSTEM_SELECTION({
+      key: 'siteName',
+      value: siteName
+    });
+
+    // Store the selectedDataCenter value in vuex store
+    this.storeSelectedDataCenter();
+  }
+
+  // @change dataCenter v-select
+  storeSelectedDataCenter () {
+    store.commit.SET_SYSTEM_SELECTION({
+      key: 'dataCenterName',
+      value: this.selectedDataCenter
+    });
+  }
 }
 </script>
 

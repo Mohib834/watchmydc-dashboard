@@ -35,15 +35,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator';
 
-@Component({
-  components: {
-    DataTabs: () => import('@/components/partials/DataTabs.vue'),
-    // Tabs Content
-    DataCenter: () => import('@/components/dashboard/monitor/DataCenter.vue')
-  }
-})
+@Component
 export default class Dashboard extends Vue {
 
 }

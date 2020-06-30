@@ -149,11 +149,7 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 
-@Component({
-  components: {
-    StatusChip: () => import('@/components/partials/StatusChip.vue')
-  }
-})
+@Component
 export default class NetworkCard extends Vue {
 
 }
@@ -199,6 +195,7 @@ export default class NetworkCard extends Vue {
     content:'';
     width: 3px;
     border-radius:100px;
+
     height: 90%;
     position:absolute;
     top:50%;

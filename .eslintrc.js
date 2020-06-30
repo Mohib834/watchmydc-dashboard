@@ -12,6 +12,7 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    semi: [2, 'always'],
     'vue/max-attributes-per-line': [
       'error',
       {
