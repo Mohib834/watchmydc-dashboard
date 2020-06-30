@@ -101,6 +101,9 @@ export default class DataCard extends Vue {
 
   tr{
     height: 70px;
+    td{
+      border-bottom: 0 !important;
+    }
   }
 }
 

@@ -24,8 +24,8 @@ body{
     box-shadow:none !important;
 }
 
-// @media(min-width: 1640px){
-//     html{
-//         font-size: 112.5%;
-//     }
-// }
+@media(max-width: 1600px){
+    html{
+        font-size: 87.5% !important;
+    }
+}

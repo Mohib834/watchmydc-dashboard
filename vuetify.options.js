@@ -20,6 +20,8 @@ import EditIcon from '@/components/icons/Edit.vue'
 import ReloadIcon from '@/components/icons/Reload.vue'
 import FullscreenIcon from '@/components/icons/Fullscreen.vue'
 import ClockCircleIcon from '@/components/icons/ClockCircle.vue'
+import UploadIcon from '@/components/icons/Upload.vue'
+import DotIcon from '@/components/icons/Dot.vue'
 
 export default {
   theme: {
@@ -97,6 +99,12 @@ export default {
       },
       clockcircle: {
         component: ClockCircleIcon
+      },
+      upload: {
+        component: UploadIcon
+      },
+      dot: {
+        component: DotIcon
       }
     }
   }

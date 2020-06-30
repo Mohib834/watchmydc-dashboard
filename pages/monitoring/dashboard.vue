@@ -44,7 +44,7 @@ import { Component, Vue } from 'nuxt-property-decorator'
     DataCenter: () => import('@/components/dashboard/monitor/DataCenter.vue')
   }
 })
-export default class Index extends Vue {
+export default class Dashboard extends Vue {
 
 }
 </script>

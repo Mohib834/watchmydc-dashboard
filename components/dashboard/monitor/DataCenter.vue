@@ -36,6 +36,11 @@
         />
       </v-col>
     </v-row>
+    <v-row>
+      <v-col cols="8">
+        <NetworkCard />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -44,7 +49,8 @@ import { Vue, Component } from 'nuxt-property-decorator'
 
 @Component({
   components: {
-    DataCard: () => import('@/components/partials/DataCard.vue')
+    DataCard: () => import('@/components/partials/DataCard.vue'),
+    NetworkCard: () => import('@/components/partials/NetworkCard.vue')
   }
 })
 export default class DataCenter extends Vue {

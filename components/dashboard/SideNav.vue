@@ -115,7 +115,8 @@
             :key="i"
             dense=""
             :to="p.to"
-            style="color: #8594A8 !important;"
+            active-class="link-active"
+            style="height: 44px;"
           >
             <v-icon
               size="20"
@@ -137,9 +138,11 @@
           <v-list-item
             v-for="(p, i) in alerts"
             :key="i"
+
+            active-class="link-active"
             dense=""
             :to="p.to"
-            style="color: #8594A8 !important"
+            style="height: 44px;"
           >
             <v-icon
               size="19"
@@ -161,9 +164,11 @@
           <v-list-item
             v-for="(p, i) in operations"
             :key="i"
+
+            active-class="link-active"
             dense=""
             :to="p.to"
-            style="color: #8594A8 !important"
+            style="height: 44px;"
           >
             <v-icon
               size="19"
@@ -184,9 +189,11 @@
           <v-list-item
             v-for="(p, i) in index"
             :key="i"
+
+            active-class="link-active"
             dense=""
             :to="p.to"
-            style="color: #8594A8 !important"
+            style="height: 44px;"
           >
             <v-icon
               size="19"
@@ -264,14 +271,14 @@ export default class SideNav extends Vue {
 
   // Dashboard pages
   monitoring = [
-    { name: 'Monitor Dashboard', to: '/monitoring', icon: 'dashboard' },
+    { name: 'Monitor Dashboard', to: '/monitoring/dashboard', icon: 'dashboard' },
     { name: 'Network and Systems', to: '/monitoring/network-and-system', icon: 'system' },
     { name: 'DCIM', to: '/monitoring/dcim', icon: 'database' },
     { name: 'Analytics', to: '/monitoring/analytics', icon: 'reconciliation' }
   ]
 
   alerts = [
-    { name: 'Alerts Dashboard', to: '/alerts', icon: 'fire' },
+    { name: 'Alerts Dashboard', to: '/alerts/dashboard', icon: 'fire' },
     { name: 'Action Center', to: '/alerts/action-center', icon: 'alert' }
   ]
 
@@ -297,7 +304,7 @@ export default class SideNav extends Vue {
     }
 
     &::-webkit-scrollbar-thumb{
-      background: #1f92a9cc;
+      background: #ddd;
       border-radius:5px;
     }
   }
@@ -311,4 +318,28 @@ export default class SideNav extends Vue {
 .side-nav .v-navigation-drawer__content{
   overflow-y:hidden;
 }
+
+.link-container {
+  .v-list-item{
+    color: #8594A8;
+
+    &::before{
+      border-right: 2px solid transparent;
+      background:none;
+      opacity: 1;
+    }
+  }
+
+  .link-active{
+      color: #006d75 !important;
+      svg{
+        color: #006d75 !important;
+      }
+      &::before{
+        opacity: 1;
+        border-right: 2px solid #006d75
+      }
+    }
+}
+
 </style>
