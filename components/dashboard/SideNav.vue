@@ -59,24 +59,30 @@
         </v-sheet>
       </v-list-item>
       <v-list-item class="px-1 mb-1">
-        <v-select
-          v-model="selectedSite"
-          :items="siteList"
-          :disabled="isLoading"
-          style="color:#13C2C2 !important; font-weight:500"
-          solo=""
-          class="solo"
-          hide-details=""
-          dense=""
-          :placeholder="isLoading ? 'Loading...' : ''"
-          background-color="#fff"
-          color="#2D415C"
-          :menu-props="{
-            nudgeBottom: 35,
-          }"
-          append-icon="mdi-chevron-down"
-          @change="setSiteDataCenters"
-        />
+        <v-sheet color="transparent">
+          <label
+            class="caption mb-1 ml-3 font-weight-light"
+            style="font-family:'Circe'; color:#79C3A7"
+          >Sites</label>
+          <v-select
+            v-model="selectedSite"
+            :items="siteList"
+            :disabled="isLoading"
+            style="color:#13C2C2 !important; font-weight:500"
+            solo=""
+            class="solo"
+            hide-details=""
+            dense=""
+            :placeholder="isLoading ? 'Loading...' : ''"
+            background-color="#fff"
+            color="#2D415C"
+            :menu-props="{
+              nudgeBottom: 35,
+            }"
+            append-icon="mdi-chevron-down"
+            @change="setSiteDataCenters"
+          />
+        </v-sheet>
       </v-list-item>
       <v-list-item class="px-1">
         <v-sheet color="transparent">
