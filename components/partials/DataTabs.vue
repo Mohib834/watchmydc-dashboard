@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
+import { Vue, Component, Prop } from 'nuxt-property-decorator';
 
 @Component
 export default class DataTabs extends Vue {
@@ -55,6 +55,12 @@ export default class DataTabs extends Vue {
 @media(max-width: 1600px){
   #tabs .data-tab{
     max-width: 300px !important;
+  }
+}
+
+@media(max-width: 1400px){
+  #tabs .data-tab{
+    max-width: 250px !important;
   }
 }
 </style>

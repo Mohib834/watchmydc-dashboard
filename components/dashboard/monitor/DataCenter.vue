@@ -8,8 +8,8 @@
       <v-col cols="6">
         <DataCard
           :headers="headersAvg"
-          title="Devices by CPU Utilization"
-          metric="cpu"
+          title="Devices by Memory Utilization"
+          metric="memory"
         />
       </v-col>
       <v-col cols="6">
@@ -24,8 +24,8 @@
       <v-col cols="6">
         <DataCard
           :headers="headersAvg"
-          title="Devices by Memory Utilization"
-          metric="memory"
+          title="Devices by CPU Utilization"
+          metric="cpu"
         />
       </v-col>
       <v-col cols="6">

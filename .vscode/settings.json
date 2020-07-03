@@ -15,5 +15,6 @@
     },
     "editor.formatOnSave": false,
     "importCost.typescriptExtensions": ["\\.tsx?$", "\\.vue$"],
-    "importCost.timeout": 20000
+    "importCost.timeout": 20000,
+    "vetur.experimental.templateInterpolationService": true
   }

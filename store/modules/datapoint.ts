@@ -33,6 +33,7 @@ const datapoint = defineModule({
           }
         })
           .then((res) => {
+            console.log('fetchTopDevice' + payload.metric, res.data);
             resolve(res.data);
           })
           .catch((err) => {
