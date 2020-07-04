@@ -108,23 +108,5 @@ export default class DataCenter extends Vue {
       class: 'data-table-header'
     }
   ]
-
-  items2 = [
-    {
-      name: 'HP NC553i Dual Port FlexFabric 10Gb Converged Network<span class="name">OPM-Server15 &nbsp; IP: 10.35.32.45</span>',
-      recieve: '0.47 %',
-      transmit: '0.04 %'
-    },
-    {
-      name: 'HP NC553i Dual Port FlexFabric 10Gb Converged Network<span class="name">OPM-Server15 &nbsp; IP: 10.35.32.45</span>',
-      receive: '0.47 %',
-      transmit: '0.04 %'
-    },
-    {
-      name: 'HP NC553i Dual Port FlexFabric 10Gb Converged Network<span class="name">OPM-Server15 &nbsp; IP: 10.35.32.45</span>',
-      recieve: '0.47 %',
-      transmit: '0.04 %'
-    }
-  ]
 }
 </script>
